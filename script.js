@@ -14,22 +14,11 @@ function install() {
         console.log('Payment handler is not fully implemented. Cannot set the instruments.');
         return;
     }
-    Promise.all([
     registration.paymentManager.instruments
         .set('instrument-key', {
             name: 'Chrome uses name and icon from the web app manifest',
             enabledMethods: ['https://pacific-garden-30467.herokuapp.com/pay3'],
-        }),
-    registration.paymentManager.instruments.set(
-        "new-card",
-        {
-            name: "Add new credit/debit card to ExampleApp",
-            enabledMethods: ["basic-card"],
-            capabilities: {
-                supportedNetworks: ['visa','mastercard','amex','discover']
-            }
-        }),
-        ])
+        })
         .then(() => {
             registration.paymentManager.instruments.get('instrument-key').then((instrument) => {
             console.log('registration.scope is' + registration.scope);
