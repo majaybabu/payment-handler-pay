@@ -6,7 +6,7 @@ self.addEventListener('canmakepayment', (evt) => {
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
     evt.respondWith({
-        methodName: 'https://127.0.0.1:8080/pay3',
+        methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
         details: {
             token: '1234567890000',
         },

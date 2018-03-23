@@ -18,7 +18,7 @@ function install() {
     registration.paymentManager.instruments
         .set('instrument-key', {
             name: 'Chrome uses name and icon from the web app manifest',
-            enabledMethods: ['https://127.0.0.1:8080/pay3'],
+            enabledMethods: ['https://pacific-garden-30467.herokuapp.com/pay3'],
         }),
     registration.paymentManager.instruments.set(
         "new-card",
