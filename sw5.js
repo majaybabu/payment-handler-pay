@@ -26,10 +26,10 @@ self.addEventListener('activate', event => {
         //createDB()
 
         new Promise((resolve, reject) => {
-            const dbX = indexedDB.open('cardsDB', 1);
+            const dbX = self.indexedDB.open('cardsDB', 1);
 
             dbX.onsuccess = event => {
-                var db = event.result;
+                var db = event.target.result;
                 var cards = db.createObjectStore('cards', {keyPath: 'id'});
                 cards.put({id: 1, last4: '0001', token: '371700000000001'});
                 cards.put({id: 2, last4: '0002', token: '371700000000002'});
