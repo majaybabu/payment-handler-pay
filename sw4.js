@@ -40,7 +40,7 @@ function createDB() {
 }
 
 function readDB() {
-    idb.open('cardsDB', 1).then(function(db) {
+    indexedDB.open('cardsDB', 1).then(function(db) {
         var tx = db.transaction('cards', 'readonly');
         cards = tx.objectStore('cards');
         return cards.getAll();
