@@ -16,9 +16,14 @@ self.addEventListener('paymentrequest', (evt) => {
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
             cards.getAll().onsuccess = e => console.log('result is ' +  e.target.result);
+            tx.oncomplete = function() {
+                db.close();
+            };
             resolve(db);
         }
         })
+
+
     );
     evt.respondWith({
         methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
@@ -29,7 +34,7 @@ self.addEventListener('paymentrequest', (evt) => {
 });
 
 self.addEventListener('install', event => {
-    console.log('sw installing............');
+    console.log('sw installing.....');
 });
 
 self.addEventListener('activate', event => {
