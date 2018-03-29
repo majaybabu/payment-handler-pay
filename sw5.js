@@ -29,7 +29,7 @@ self.addEventListener('activate', event => {
 
 
 function createDB() {
-    idb.open('cardsDB', 1, function(cardsDB) {
+    indexedDB.open('cardsDB', 1, function(cardsDB) {
         var cards = cardsDB.createObjectStore('cards', {
             keyPath: 'id'
         });
