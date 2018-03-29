@@ -27,15 +27,15 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     console.log('sw now ready to handle');
-    event.waitUntil(
-        createDB();
-        readDB().then(function(items) {
+    event.waitUntil({
+        createDB()
+        readDB().then(function (items) {
             for (var i = 0; i < items.length; i++) {
                 console.log('item is ' + items[i].get())
                 //Do something
             }
         });
-    );
+    });
 });
 
 
