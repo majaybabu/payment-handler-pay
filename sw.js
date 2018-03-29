@@ -5,9 +5,9 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    event.waitUntil({
+    event.waitUntil(
         readDB()
-    });
+    );
     evt.respondWith({
         methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
         details: {
@@ -22,9 +22,9 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     console.log('sw now ready to handle');
-    event.waitUntil({
+    event.waitUntil(
         createDB()
-    });
+    );
 });
 
 
