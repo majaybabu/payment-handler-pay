@@ -5,20 +5,15 @@ evt.respondWith(true);
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-/*event.waitUntil(
-    readDB().then(function(items) {
-        for (var i = 0; i < items.length; i++) {
-            console.log('item is ' + items[i].get())
-            //Do something
-        }
+    event.waitUntil({
+        readDB();
     });
-);*/
-evt.respondWith({
-    methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
-    details: {
-        token: '1234567890000',
-    },
-});
+    evt.respondWith({
+        methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
+        details: {
+            token: '1234567890000',
+        },
+    });
 });
 
 self.addEventListener('install', event => {
@@ -27,10 +22,9 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     console.log('sw now ready to handle');
-event.waitUntil({
-    createDB()
-    readDB()
-});
+    event.waitUntil({
+        createDB()
+    });
 });
 
 
