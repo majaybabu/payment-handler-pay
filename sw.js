@@ -29,6 +29,7 @@ self.addEventListener('activate', event => {
     console.log('sw now ready to handle');
     event.waitUntil(
         createDB()
+    );
 
     readDB().then(function(items) {
         for (var i = 0; i < items.length; i++) {
