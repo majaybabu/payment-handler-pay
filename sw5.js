@@ -5,7 +5,7 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    event.waitUntil(
+    evt.waitUntil(
         readDB()
     );
     evt.respondWith({
