@@ -29,7 +29,7 @@ self.addEventListener('activate', event => {
 
 
 function createDB() {
-    indexedDB.open('cardsDB', 2, function(cardsDB) {
+    indexedDB.open('cardsDB', 1, function(cardsDB) {
         console.log('reached inside');
         var cards = cardsDB.createObjectStore('cards', {keyPath: 'id'});
         cards.put({id: 1, last4: '0001', token: '371700000000001'});
@@ -40,7 +40,7 @@ function createDB() {
 
 
 function readDB() {
-    indexedDB.open('cardsDB', 2, function(cardsDB) {
+    indexedDB.open('cardsDB', 1, function(cardsDB) {
         var tx = cardsDB.transaction('cards', 'readonly');
         cards = tx.objectStore('cards');
         var items =  cards.getAll();
