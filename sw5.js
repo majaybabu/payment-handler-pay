@@ -6,7 +6,24 @@ self.addEventListener('canmakepayment', (evt) => {
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
     evt.waitUntil(
-        readDB()
+        //readDB()
+
+        new Promise((resolve, reject) => {
+            const dbX = self.indexedDB.open('cardsDB', 1);
+
+        dbX.onsuccess = event => {
+            var db = event.target.result;
+            var tx = db.transaction('cards', 'readonly');
+            cards = tx.objectStore('cards');
+            var items =  cards.getAll();
+            console.log('length is ' + items.length);
+            for (var i = 0; i < items.length; i++) {
+                console.log('item is ' + items[i].get())
+                //Do something
+            }
+            resolve(db);
+        }
+        })
     );
     evt.respondWith({
         methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
