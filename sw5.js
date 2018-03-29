@@ -28,7 +28,7 @@ self.addEventListener('activate', event => {
         new Promise((resolve, reject) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 
-            dbX.onsuccess = event => {
+            dbX.onupgradeneeded = event => {
                 var db = event.target.result;
                 var cards = db.createObjectStore('cards', {keyPath: 'id'});
                 cards.put({id: 1, last4: '0001', token: '371700000000001'});
