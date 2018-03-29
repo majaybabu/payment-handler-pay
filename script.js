@@ -40,6 +40,10 @@ function install() {
 
 
 window.addEventListener('load', function(evt) {
+    if (!('indexedDB' in window)) {
+        console.log('This browser doesn\'t support IndexedDB');
+        return;
+    }
     install();
 });
 
