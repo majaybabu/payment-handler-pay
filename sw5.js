@@ -18,12 +18,28 @@ self.addEventListener('paymentrequest', (evt) => {
 
 self.addEventListener('install', event => {
     console.log('sw installing........');
+    event.waitUntil(
+        indexedDB.close('cardsDB', 1)
+    );
 });
 
 self.addEventListener('activate', event => {
     console.log('sw now ready to handle');
     event.waitUntil(
-        createDB()
+        //createDB()
+
+        new Promise((resolve, reject) => {
+            const dbX = indexedDB.open('cardsDB', 1);
+
+            dbX.onsuccess = event => {
+                var db = event.result;
+                var cards = db.createObjectStore('cards', {keyPath: 'id'});
+                cards.put({id: 1, last4: '0001', token: '371700000000001'});
+                cards.put({id: 2, last4: '0002', token: '371700000000002'});
+                cards.put({id: 3, last4: '0003', token: '371700000000003'});
+                resolve(db);
+            }
+        })
     );
 });
 
