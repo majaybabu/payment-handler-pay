@@ -30,12 +30,14 @@ self.addEventListener('activate', event => {
 
 function createDB() {
     indexedDB.open('cardsDB', 1, function(cardsDB) {
+        console.log("reached inside")
         var cards = cardsDB.createObjectStore('cards', {keyPath: 'id'});
         cards.put({id: 1, last4: '0001', token: '371700000000001'});
         cards.put({id: 2, last4: '0002', token: '371700000000002'});
         cards.put({id: 3, last4: '0003', token: '371700000000003'});
     });
 }
+
 
 function readDB() {
     indexedDB.open('cardsDB', 1, function(cardsDB) {
