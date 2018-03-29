@@ -51,9 +51,10 @@ function createDB() {
 }
 
 function readDB() {
+    var cards;
     idb.open('cardsDB', 1).then(function(db) {
         var tx = db.transaction('cards', 'readonly');
-        var cards = tx.objectStore('cards');
-        return cards.getAll();
+        cards = tx.objectStore('cards');
     })
+    return cards.getAll();
 }
