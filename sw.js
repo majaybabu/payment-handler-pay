@@ -1,24 +1,24 @@
 self.addEventListener('canmakepayment', (evt) => {
     console.log('canmakepayment evt is ' + evt);
-    evt.respondWith(true);
+evt.respondWith(true);
 });
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    /*event.waitUntil(
-        readDB().then(function(items) {
-            for (var i = 0; i < items.length; i++) {
-                console.log('item is ' + items[i].get())
-                //Do something
-            }
-        });
-    );*/
-    evt.respondWith({
-        methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
-        details: {
-            token: '1234567890000',
-        },
+/*event.waitUntil(
+    readDB().then(function(items) {
+        for (var i = 0; i < items.length; i++) {
+            console.log('item is ' + items[i].get())
+            //Do something
+        }
     });
+);*/
+evt.respondWith({
+    methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
+    details: {
+        token: '1234567890000',
+    },
+});
 });
 
 self.addEventListener('install', event => {
@@ -27,15 +27,10 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     console.log('sw now ready to handle');
-    event.waitUntil({
-        createDB()
-        readDB().then(function (items) {
-            for (var i = 0; i < items.length; i++) {
-                console.log('item is ' + items[i].get())
-                //Do something
-            }
-        });
-    });
+event.waitUntil({
+    createDB()
+    readDB()
+});
 });
 
 
@@ -51,10 +46,17 @@ function createDB() {
 }
 
 function readDB() {
-    var cards;
     idb.open('cardsDB', 1).then(function(db) {
         var tx = db.transaction('cards', 'readonly');
         cards = tx.objectStore('cards');
-    })
-    return cards.getAll();
+        return cards.getAll();
+    }).then(function(items) {
+        for (var i = 0; i < items.length; i++) {
+            console.log('item is ' + items[i].get())
+            //Do something
+        }
+    });
+
+
+
 }
