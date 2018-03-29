@@ -15,12 +15,7 @@ self.addEventListener('paymentrequest', (evt) => {
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
-            var items =  cards.getAll();
-            console.log('length is ' + cards.get(1));
-            for (var i = 0; i < items.length; i++) {
-                console.log('item is ' + items[i].get())
-                //Do something
-            }
+            cards.getAll().onsuccess = e => console.log('result is ' +  e.target.result);
             resolve(db);
         }
         })
