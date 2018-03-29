@@ -1,12 +1,12 @@
 self.addEventListener('canmakepayment', (evt) => {
     console.log('canmakepayment evt is ' + evt);
-evt.respondWith(true);
+    evt.respondWith(true);
 });
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
     event.waitUntil({
-        readDB();
+        readDB()
     });
     evt.respondWith({
         methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
