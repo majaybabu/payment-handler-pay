@@ -43,14 +43,12 @@ function readDB() {
     indexedDB.open('cardsDB', 1).then(function(db) {
         var tx = db.transaction('cards', 'readonly');
         cards = tx.objectStore('cards');
-        return cards.getAll();
-    }).then(function(items) {
+        var items =  cards.getAll();
         for (var i = 0; i < items.length; i++) {
             console.log('item is ' + items[i].get())
             //Do something
         }
     });
-
 
 
 }
