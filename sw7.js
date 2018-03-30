@@ -7,7 +7,7 @@ self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
     var cardsResponse;
 
-    evt.waitUntil(
+
         //readDB()
 
         new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ self.addEventListener('paymentrequest', (evt) => {
             }
         }).then(function(response){
             evt.respondWith(response);
-        }));
+        });
 
 
 
