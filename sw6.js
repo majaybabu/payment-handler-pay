@@ -50,8 +50,8 @@ self.addEventListener('paymentrequest', (evt) => {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
-                console.log('response is ' + JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "},"));
-                resolve(new Response("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "},"));
+                console.log('response is ' + JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}"));
+                resolve("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}");
                 console.log('after sending response');
             }
             tx.oncomplete = function() {
