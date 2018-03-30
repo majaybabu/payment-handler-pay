@@ -10,7 +10,7 @@ self.addEventListener('paymentrequest', (evt) => {
 
         //readDB()
 
-        new Promise((resolve, reject) => {
+       /* new Promise((resolve, reject) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 
             dbX.onsuccess = event => {
@@ -41,11 +41,11 @@ self.addEventListener('paymentrequest', (evt) => {
         }).then(function(response){
             console.log('response is ' + JSON.stringify(response));
             evt.respondWith(response);
-        });
+        });*/
 
 
 
-    /*evt.respondWith(
+    evt.respondWith(
 
         var promise = new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
@@ -63,8 +63,8 @@ self.addEventListener('paymentrequest', (evt) => {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
-                console.log('response is ' + JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}"));
-                resolve("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}");
+                console.log('response is ' + JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+                resolve("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
                 console.log('after sending response');
             }
             tx.oncomplete = function() {
@@ -74,10 +74,17 @@ self.addEventListener('paymentrequest', (evt) => {
     });
 
     promise.then(function(response){
-        response;
+        console.log('response is ' + JSON.stringify(response));
+        //return response;
+        return {
+            methodName: 'https://emerald-eon.appspot.com/bobpay',
+            details: {
+                token: '1234567890',
+            },
+        }
     });
 
-);*/
+);
 
 });
 
