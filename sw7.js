@@ -47,7 +47,7 @@ self.addEventListener('paymentrequest', (evt) => {
 
     evt.respondWith(
 
-        var promise = new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
         var cardsResponse;
         dbX.onsuccess = event => {
@@ -71,9 +71,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 db.close();
             };
         }
-    });
-
-    promise.then(function(response){
+    }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
         //return response;
         return {
