@@ -13,6 +13,7 @@ self.addEventListener('paymentrequest', (evt) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 
         dbX.onsuccess = event => {
+            var cardsResponse = "{}"
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
