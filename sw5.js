@@ -18,8 +18,10 @@ self.addEventListener('paymentrequest', (evt) => {
             cards.getAll().onsuccess = e => {
                 console.log('all cards are ' +  JSON.stringify(e.target.result));
                 var cardsJSON = JSON.stringify(e.target.result);
+                console.log('length is  ' + cardsJSON.length);
                 for (var i = 0; i < cardsJSON.length; i++) {
-                    var card = JSON.parse(cardsJSON[i]);
+                    console.log('card is  ' + JSON.stringify(cardsJSON[i]));
+                    var card = JSON.parse(JSON.stringify(cardsJSON[i]));
                     console.log('token is ' + card.token);
                 }
             }
