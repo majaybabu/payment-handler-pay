@@ -15,7 +15,7 @@ self.addEventListener('paymentrequest', (evt) => {
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
-            cards.getAll().onsuccess = e => console.log('result is ' +  e.target.result);
+            cards.getAll().onsuccess = e => console.log('token is ' +  e.target.result.token + ' last4 is ' + e.target.result.last4);
             tx.oncomplete = function() {
                 db.close();
             };
