@@ -10,7 +10,7 @@ self.addEventListener('paymentrequest', (evt) => {
 
         //readDB()
 
-        new Promise((resolve, reject) => {
+        /*new Promise((resolve, reject) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 
             dbX.onsuccess = event => {
@@ -47,15 +47,15 @@ self.addEventListener('paymentrequest', (evt) => {
                 "            },\n" +
                 "        }"
             return st;
-        });
+        });*/
 
 
-        /*evt.respondWith({
+    evt.respondWith({
             methodName: 'https://emerald-eon.appspot.com/bobpay',
             details: {
                 token: '1234567890',
             },
-        });*/
+        });
 
 
 
