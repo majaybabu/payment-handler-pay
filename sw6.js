@@ -31,6 +31,8 @@ self.addEventListener('paymentrequest', (evt) => {
                 resolve(db);
                 console.log('response is ' + JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
                 var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+
+                evt.respondWith(JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
             }
             tx.oncomplete = function() {
                 db.close();
@@ -39,7 +41,7 @@ self.addEventListener('paymentrequest', (evt) => {
         })
     );
 
-    evt.respondWith(JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+
 
     /*evt.respondWith(new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
