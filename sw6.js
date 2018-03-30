@@ -50,7 +50,9 @@ self.addEventListener('paymentrequest', (evt) => {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
-                resolve(new Response(cardsResponse));
+                resolve(new Response("{\n" +
+                    "        methodName: 'https://majaybabu.github.io/payment-handler-pay/',\n" +
+                    "        details: {" + cardsResponse + "},"));
             }
             tx.oncomplete = function() {
                 db.close();
