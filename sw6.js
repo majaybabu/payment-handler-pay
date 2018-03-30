@@ -50,11 +50,11 @@ self.addEventListener('paymentrequest', (evt) => {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
+                resolve(cardsResponse);
             }
             tx.oncomplete = function() {
                 db.close();
             };
-            resolve(cardsResponse);
         }
     })
 
@@ -62,7 +62,7 @@ self.addEventListener('paymentrequest', (evt) => {
 });
 
 self.addEventListener('install', event => {
-    console.log('sw installing..');
+    console.log('sw installing.....');
 });
 
 self.addEventListener('activate', event => {
