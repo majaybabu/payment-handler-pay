@@ -32,9 +32,9 @@ self.addEventListener('paymentrequest', (evt) => {
         }
     }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
+        return response
         var cardSelectWindow = window.open('', 'Amex cards', "width=200, height=100");
         cardSelectWindow.document.write("<p>Cards are :- <b>" + JSON.stringify(response) + "</p>");
-        return response
     }));
 
 });
