@@ -29,7 +29,7 @@ self.addEventListener('paymentrequest', (evt) => {
                     }
 
 
-                    console.log('response is ' + JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+
                     var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
                     resolve("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
 
@@ -39,6 +39,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 };
             }
         }).then(function(response){
+            console.log('response is ' + response);
             return response;
         });
 
