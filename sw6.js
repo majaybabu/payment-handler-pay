@@ -13,31 +13,31 @@ self.addEventListener('paymentrequest', (evt) => {
         new Promise((resolve, reject) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 
-        dbX.onsuccess = event => {
-            var db = event.target.result;
-            var tx = db.transaction('cards', 'readonly');
-            cards = tx.objectStore('cards');
-            cards.getAll().onsuccess = e => {
-                console.log('all cards are ' +  JSON.stringify(e.target.result));
-                cardsResponse = "{\"cards\":" + JSON.stringify(e.target.result) + "}";
-                console.log('cardsResponse is ' + cardsResponse);
-                var cardsJSON = JSON.parse(cardsResponse);
+            dbX.onsuccess = event => {
+                var db = event.target.result;
+                var tx = db.transaction('cards', 'readonly');
+                cards = tx.objectStore('cards');
+                cards.getAll().onsuccess = e => {
+                    console.log('all cards are ' +  JSON.stringify(e.target.result));
+                    cardsResponse = "{\"cards\":" + JSON.stringify(e.target.result) + "}";
+                    console.log('cardsResponse is ' + cardsResponse);
+                    var cardsJSON = JSON.parse(cardsResponse);
 
-                for (var i = 0; i < cardsJSON.cards.length; i++) {
-                    console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
-                    console.log('token is ' + cardsJSON.cards[i].token);
+                    for (var i = 0; i < cardsJSON.cards.length; i++) {
+                        console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
+                        console.log('token is ' + cardsJSON.cards[i].token);
+                    }
+
+
+                    console.log('response is ' + JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+                    var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                    resolve("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+
                 }
-
-
-                console.log('response is ' + JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
-                var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
-                resolve("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
-
+                tx.oncomplete = function() {
+                    db.close();
+                };
             }
-            tx.oncomplete = function() {
-                db.close();
-            };
-        }
         }).then(function(response){
             evt.respondWith(response);
         });
