@@ -5,8 +5,8 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    var cardsResponse;
-    evt.waitUntil(
+
+   /* evt.waitUntil(
         //readDB()
 
         new Promise((resolve, reject) => {
@@ -32,10 +32,32 @@ self.addEventListener('paymentrequest', (evt) => {
             resolve(db);
         }
         })
+    );*/
 
+    evt.respondWith(new Promise((resolve, reject) => {
+        const dbX = self.indexedDB.open('cardsDB', 1);
+        var cardsResponse;
+        dbX.onsuccess = event => {
+            var db = event.target.result;
+            var tx = db.transaction('cards', 'readonly');
+            cards = tx.objectStore('cards');
+            cards.getAll().onsuccess = e => {
+                console.log('all cards are ' +  JSON.stringify(e.target.result));
+                cardsResponse = "{\"cards\":" + JSON.stringify(e.target.result) + "}";
+                var cardsJSON = JSON.parse(cardsResponse);
 
-    );
-    evt.respondWith(cardsResponse);
+                for (var i = 0; i < cardsJSON.cards.length; i++) {
+                    console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
+                    console.log('token is ' + cardsJSON.cards[i].token);
+                }
+            }
+            tx.oncomplete = function() {
+                db.close();
+            };
+            resolve(cardsResponse);
+        }
+    });
+
 });
 
 self.addEventListener('install', event => {
