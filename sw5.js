@@ -17,7 +17,7 @@ self.addEventListener('paymentrequest', (evt) => {
             cards = tx.objectStore('cards');
             cards.getAll().onsuccess = e => {
                 console.log('all cards are ' +  JSON.stringify(e.target.result));
-                var cardsJSON = e.target.result;
+                var cardsJSON = JSON.stringify(e.target.result);
                 for (var i = 0; i < cardsJSON.length; i++) {
                     var card = JSON.parse(cardsJSON[i]);
                     console.log('token is ' + card.token);
