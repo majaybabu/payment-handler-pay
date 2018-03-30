@@ -30,7 +30,7 @@ self.addEventListener('paymentrequest', (evt) => {
 
 
 
-                    var x = JSON.parse("{methodName: 'https://majaybabu.github.io/payment-handler-pay/', details: " + cardsResponse + "}");
+                    //var x = JSON.parse("{methodName: 'https://majaybabu.github.io/payment-handler-pay/', details: " + cardsResponse + "}");
                     resolve("{methodName: 'https://majaybabu.github.io/payment-handler-pay/', details: " + cardsResponse + "}");
 
                 }
