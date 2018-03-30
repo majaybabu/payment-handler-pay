@@ -5,68 +5,27 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    var cardsResponse;
-
-
-        //readDB()
-
-       /* new Promise((resolve, reject) => {
-            const dbX = self.indexedDB.open('cardsDB', 1);
-
-            dbX.onsuccess = event => {
-                var db = event.target.result;
-                var tx = db.transaction('cards', 'readonly');
-                cards = tx.objectStore('cards');
-                cards.getAll().onsuccess = e => {
-                    console.log('all cards are ' +  JSON.stringify(e.target.result));
-                    cardsResponse = "{\"cards\":" + JSON.stringify(e.target.result) + "}";
-                    console.log('cardsResponse is ' + cardsResponse);
-                    var cardsJSON = JSON.parse(cardsResponse);
-
-                    for (var i = 0; i < cardsJSON.cards.length; i++) {
-                        console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
-                        console.log('token is ' + cardsJSON.cards[i].token);
-                    }
-
-
-
-                    var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
-                    resolve(x);
-
-                }
-                tx.oncomplete = function() {
-                    db.close();
-                };
-            }
-        }).then(function(response){
-            console.log('response is ' + JSON.stringify(response));
-            evt.respondWith(response);
-        });*/
-
-
-
     evt.respondWith(
-
         new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
-        var cardsResponse;
         dbX.onsuccess = event => {
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
             cards.getAll().onsuccess = e => {
                 console.log('all cards are ' +  JSON.stringify(e.target.result));
-                cardsResponse = "{\"cards\":" + JSON.stringify(e.target.result) + "}";
-                var cardsJSON = JSON.parse(cardsResponse);
+                var cardsResponse = "{\"cards\":" + JSON.stringify(e.target.result) + "}";
 
+                //below is just for logging
+                var cardsJSON = JSON.parse(cardsResponse);
                 for (var i = 0; i < cardsJSON.cards.length; i++) {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
+                //above is just for logging
 
-                var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
-                resolve(x);
-
+                var cardsJSONResponse = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                resolve(cardsJSONResponse);
             }
             tx.oncomplete = function() {
                 db.close();
@@ -74,7 +33,6 @@ self.addEventListener('paymentrequest', (evt) => {
         }
     }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
-        //return response;
         return response
     }));
 
@@ -87,8 +45,6 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
     console.log('sw now ready to handle');
     event.waitUntil(
-        //createDB()
-
         new Promise((resolve, reject) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 

@@ -1,7 +1,7 @@
 
 function install() {
 
-    navigator.serviceWorker.register('sw8.js')
+    navigator.serviceWorker.register('sw.js')
         .then(() => {
         return navigator.serviceWorker.ready;
 })
