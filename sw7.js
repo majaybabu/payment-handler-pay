@@ -39,12 +39,14 @@ self.addEventListener('paymentrequest', (evt) => {
                 };
             }
         }).then(function(response){
-            evt.respondWith(response);
+            return response;
         });
 
 
 
-    /*evt.respondWith(new Promise((resolve, reject) => {
+    /*evt.respondWith(
+
+        var promise = new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
         var cardsResponse;
         dbX.onsuccess = event => {
@@ -68,7 +70,11 @@ self.addEventListener('paymentrequest', (evt) => {
                 db.close();
             };
         }
-    })
+    });
+
+    promise.then(function(response){
+        response;
+    });
 
 );*/
 
