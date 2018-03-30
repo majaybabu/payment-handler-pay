@@ -50,7 +50,7 @@ self.addEventListener('paymentrequest', (evt) => {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
-                resolve(cardsResponse);
+                resolve(new Response(cardsResponse));
             }
             tx.oncomplete = function() {
                 db.close();
