@@ -40,8 +40,7 @@ self.addEventListener('paymentrequest', (evt) => {
             }
         }).then(function(response){
             evt.respondWith(response);
-        });
-    );
+        }));
 
 
 
