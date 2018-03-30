@@ -5,6 +5,7 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
+    var cardsResponse;
     evt.waitUntil(
         //readDB()
 
@@ -17,7 +18,8 @@ self.addEventListener('paymentrequest', (evt) => {
             cards = tx.objectStore('cards');
             cards.getAll().onsuccess = e => {
                 console.log('all cards are ' +  JSON.stringify(e.target.result));
-                var cardsJSON = JSON.parse("{\"cards\":" + JSON.stringify(e.target.result) + "}");
+                cardsResponse = "{\"cards\":" + JSON.stringify(e.target.result) + "}";
+                var cardsJSON = JSON.parse(cardsResponse);
 
                 for (var i = 0; i < cardsJSON.cards.length; i++) {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
@@ -33,12 +35,7 @@ self.addEventListener('paymentrequest', (evt) => {
 
 
     );
-    evt.respondWith({
-        methodName: 'https://pacific-garden-30467.herokuapp.com/pay3',
-        details: {
-            token: '1234567890000',
-        },
-    });
+    evt.respondWith(cardsResponse);
 });
 
 self.addEventListener('install', event => {
