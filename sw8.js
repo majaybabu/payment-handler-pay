@@ -80,9 +80,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 token: '1234567890',
             },
         }
-    });
-
-);
+    }));
 
 });
 
