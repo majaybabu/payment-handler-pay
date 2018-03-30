@@ -30,10 +30,9 @@ self.addEventListener('paymentrequest', (evt) => {
             tx.oncomplete = function() {
                 db.close();
             };
-            resolve(db);
-
-            console.log('response is ' + JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}"));
             evt.respondWith("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}");
+            //resolve(db);
+            console.log('response is ' + JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}"));
         }
         })
     );
