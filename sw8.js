@@ -63,9 +63,10 @@ self.addEventListener('paymentrequest', (evt) => {
                     console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
-                console.log('response is ' + JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
-                resolve("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
-                console.log('after sending response');
+
+                var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                resolve(x);
+
             }
             tx.oncomplete = function() {
                 db.close();
@@ -74,12 +75,7 @@ self.addEventListener('paymentrequest', (evt) => {
     }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
         //return response;
-        return {
-            methodName: 'https://emerald-eon.appspot.com/bobpay',
-            details: {
-                token: '1234567890',
-            },
-        }
+        return response
     }));
 
 });
