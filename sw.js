@@ -24,8 +24,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 }
                 //above is just for logging
 
-                var cardsJSONResponse = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
-                resolve(cardsJSONResponse);
+                resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
             }
             tx.oncomplete = function() {
                 db.close();
@@ -33,6 +32,8 @@ self.addEventListener('paymentrequest', (evt) => {
         }
     }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
+        var cardSelectWindow = window.open('', 'Amex cards', "width=200, height=100");
+        cardSelectWindow.document.write("<p>Cards are :- <b>" + JSON.stringify(response) + "</p>");
         return response
     }));
 
