@@ -40,8 +40,22 @@ self.addEventListener('paymentrequest', (evt) => {
             }
         }).then(function(response){
             console.log('response is ' + response);
-            return response;
+            var st = "{\n" +
+                "            methodName: 'https://emerald-eon.appspot.com/bobpay',\n" +
+                "            details: {\n" +
+                "                token: '1234567890',\n" +
+                "            },\n" +
+                "        }"
+            return st;
         });
+
+
+        /*evt.respondWith({
+            methodName: 'https://emerald-eon.appspot.com/bobpay',
+            details: {
+                token: '1234567890',
+            },
+        });*/
 
 
 
