@@ -17,12 +17,11 @@ self.addEventListener('paymentrequest', (evt) => {
             cards = tx.objectStore('cards');
             cards.getAll().onsuccess = e => {
                 console.log('all cards are ' +  JSON.stringify(e.target.result));
-                var cardsJSON = JSON.stringify(e.target.result);
-                console.log('length is  ' + cardsJSON.length);
-                for (var i = 0; i < cardsJSON.length; i++) {
-                    console.log('card is  ' + JSON.stringify(cardsJSON[i]));
-                    var card = JSON.parse(JSON.stringify(cardsJSON[i]));
-                    console.log('token is ' + card.token);
+                var cardsJSON = JSON.parse("{cards:" + JSON.stringify(e.target.result) + "}");
+
+                for (var i = 0; i < cardsJSON.cards.length; i++) {
+                    console.log('card is  ' + JSON.stringify(cardsJSON.cards[i]));
+                    console.log('token is ' + cardsJSON.cards[i].token);
                 }
             }
             tx.oncomplete = function() {
