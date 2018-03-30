@@ -5,6 +5,7 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
+    var cardsResponse;
 
     evt.waitUntil(
         //readDB()
@@ -13,7 +14,6 @@ self.addEventListener('paymentrequest', (evt) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 
         dbX.onsuccess = event => {
-            var cardsResponse = "{}"
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
@@ -30,12 +30,14 @@ self.addEventListener('paymentrequest', (evt) => {
             tx.oncomplete = function() {
                 db.close();
             };
-            evt.respondWith("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}");
-            //resolve(db);
+            resolve(db);
             console.log('response is ' + JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}"));
+            var x = JSON.parse("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}");
         }
         })
     );
+
+    evt.respondWith(JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}"));
 
     /*evt.respondWith(new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
