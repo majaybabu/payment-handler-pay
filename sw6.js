@@ -6,7 +6,7 @@ self.addEventListener('canmakepayment', (evt) => {
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
 
-   /* evt.waitUntil(
+    evt.waitUntil(
         //readDB()
 
         new Promise((resolve, reject) => {
@@ -30,11 +30,14 @@ self.addEventListener('paymentrequest', (evt) => {
                 db.close();
             };
             resolve(db);
+
+            console.log('response is ' + JSON.stringify("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}"));
+            evt.respondWith("{\"methodName\": 'https://majaybabu.github.io/payment-handler-pay/', \"details\": " + cardsResponse + "}");
         }
         })
-    );*/
+    );
 
-    evt.respondWith(new Promise((resolve, reject) => {
+    /*evt.respondWith(new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
         var cardsResponse;
         dbX.onsuccess = event => {
@@ -60,7 +63,8 @@ self.addEventListener('paymentrequest', (evt) => {
         }
     })
 
-);
+);*/
+
 });
 
 self.addEventListener('install', event => {
