@@ -40,7 +40,7 @@ self.addEventListener('paymentrequest', (evt) => {
             }
         }).then(function(response){
             console.log('response is ' + JSON.stringify(response));
-            return response;
+            evt.respondWith(response);
         });
 
 
