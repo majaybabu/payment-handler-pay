@@ -56,8 +56,9 @@ self.addEventListener('paymentrequest', (evt) => {
             };
             resolve(cardsResponse);
         }
-    });
+    })
 
+);
 });
 
 self.addEventListener('install', event => {
