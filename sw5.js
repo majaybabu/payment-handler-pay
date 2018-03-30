@@ -15,7 +15,7 @@ self.addEventListener('paymentrequest', (evt) => {
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
-            cards.getAll().onsuccess = e => console.log('token is ' +  JSON.stringify(e.target.result.toJSON()));
+            cards.getAll().onsuccess = e => console.log('token is ' +  JSON.stringify(e.target.result));
             tx.oncomplete = function() {
                 db.close();
             };
@@ -34,7 +34,7 @@ self.addEventListener('paymentrequest', (evt) => {
 });
 
 self.addEventListener('install', event => {
-    console.log('sw installing.');
+    console.log('sw installing....');
 });
 
 self.addEventListener('activate', event => {
