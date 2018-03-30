@@ -28,17 +28,19 @@ self.addEventListener('paymentrequest', (evt) => {
                     console.log('token is ' + cardsJSON.cards[i].token);
                 }
 
-                resolve(db);
+
                 console.log('response is ' + JSON.stringify("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
                 var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                resolve("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
 
-                evt.respondWith("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
             }
             tx.oncomplete = function() {
                 db.close();
             };
         }
-        })
+        }).then(function(response){
+            evt.respondWith(response);
+        });
     );
 
 
