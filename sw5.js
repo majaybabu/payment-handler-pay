@@ -5,6 +5,7 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
+    var cardsJSON;
     evt.waitUntil(
         //readDB()
 
@@ -15,7 +16,14 @@ self.addEventListener('paymentrequest', (evt) => {
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
             cards = tx.objectStore('cards');
-            cards.getAll().onsuccess = e => console.log('token is ' +  JSON.stringify(e.target.result));
+            cards.getAll().onsuccess = e => {
+                console.log('all cards are ' +  JSON.stringify(e.target.result));
+                cardsJSON = JSON.parse(e.target.result);
+                for (var i = 0; i < cardsJSON.length; i++) {
+                    var card = cardsJSON[i];
+                    console.log('token is ' + card.token);
+                }
+            }
             tx.oncomplete = function() {
                 db.close();
             };
@@ -57,28 +65,3 @@ self.addEventListener('activate', event => {
     );
 });
 
-
-function createDB() {
-    return indexedDB.open('cardsDB', 1, function(cardsDB) {
-        console.log('reached inside');
-        var cards = cardsDB.createObjectStore('cards', {keyPath: 'id'});
-        cards.put({id: 1, last4: '0001', token: '371700000000001'});
-        cards.put({id: 2, last4: '0002', token: '371700000000002'});
-        cards.put({id: 3, last4: '0003', token: '371700000000003'});
-    });
-}
-
-
-function readDB() {
-    return indexedDB.open('cardsDB', 1, function(cardsDB) {
-        var tx = cardsDB.transaction('cards', 'readonly');
-        cards = tx.objectStore('cards');
-        var items =  cards.getAll();
-        for (var i = 0; i < items.length; i++) {
-            console.log('item is ' + items[i].get())
-            //Do something
-        }
-    });
-
-
-}
