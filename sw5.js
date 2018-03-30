@@ -42,7 +42,7 @@ self.addEventListener('paymentrequest', (evt) => {
 });
 
 self.addEventListener('install', event => {
-    console.log('sw installing....');
+    console.log('sw installing..');
 });
 
 self.addEventListener('activate', event => {
