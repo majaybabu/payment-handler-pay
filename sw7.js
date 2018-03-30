@@ -10,7 +10,7 @@ self.addEventListener('paymentrequest', (evt) => {
 
         //readDB()
 
-        /*new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             const dbX = self.indexedDB.open('cardsDB', 1);
 
             dbX.onsuccess = event => {
@@ -30,8 +30,8 @@ self.addEventListener('paymentrequest', (evt) => {
 
 
 
-                    //var x = JSON.parse("{methodName: 'https://majaybabu.github.io/payment-handler-pay/', details: " + cardsResponse + "}");
-                    resolve("{methodName: 'https://majaybabu.github.io/payment-handler-pay/', details: " + cardsResponse + "}");
+                    var x = JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                    resolve(x);
 
                 }
                 tx.oncomplete = function() {
@@ -39,22 +39,8 @@ self.addEventListener('paymentrequest', (evt) => {
                 };
             }
         }).then(function(response){
-            console.log('response is ' + response);
-            var st = "{\n" +
-                "            methodName: 'https://emerald-eon.appspot.com/bobpay',\n" +
-                "            details: {\n" +
-                "                token: '1234567890',\n" +
-                "            },\n" +
-                "        }"
-            return st;
-        });*/
-
-
-    evt.respondWith({
-            methodName: 'https://emerald-eon.appspot.com/bobpay',
-            details: {
-                token: '1234567890',
-            },
+            console.log('response is ' + JSON.stringify(response));
+            return response;
         });
 
 
@@ -96,7 +82,7 @@ self.addEventListener('paymentrequest', (evt) => {
 });
 
 self.addEventListener('install', event => {
-    console.log('sw installing...');
+    console.log('sw installing.....');
 });
 
 self.addEventListener('activate', event => {
