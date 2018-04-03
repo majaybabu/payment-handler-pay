@@ -39,7 +39,7 @@ self.addEventListener('paymentrequest', (evt) => {
             type: "popup"
         }
 
-        chrome.windows.create(props, function(windowObj){
+        windows.create(props, function(windowObj){
             windowObj.write("xyz");
         });
         return response;
