@@ -32,9 +32,16 @@ self.addEventListener('paymentrequest', (evt) => {
         }
     }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
-        var cardSelectWindow = window.open('', 'Amex cards', "width=200, height=100");
-        cardSelectWindow.document.write("<script>document.getElementById(\"btn\").addEventListener(\"click\", function () { return " + response + ";});</script><p>Cards are :- <b>" + JSON.stringify(response) + "</p>");
-        cardSelectWindow.focus();
+        var props = {
+            //url: "http://www.stackoverflow.com",
+            height: "100",
+            width: "100",
+            type: "popup"
+        }
+
+        chrome.windows.create(props, function(windowObj){
+            windowObj.write("xyz");
+        });
         return response;
     }));
 
