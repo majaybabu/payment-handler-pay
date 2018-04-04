@@ -9,6 +9,7 @@ self.addEventListener('paymentrequest', (evt) => {
         new Promise((resolve, reject) => {
 
             evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
+            .then(function(windowClient) {
                 console.log('posting msg....');
                 windowClient.postMessage({msg : "Hey I just got a fetch from you!"});
                 resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": \"Hey I just got a fetch from you!\"}"));
