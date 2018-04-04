@@ -3,6 +3,10 @@ self.addEventListener('canmakepayment', (evt) => {
     evt.respondWith(true);
 });
 
+self.addEventListener("message", function (event) {
+    console.log('mesg recvd' + event.data);
+});
+
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
     evt.respondWith(
@@ -15,9 +19,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": {msg : \"Hey I just got a fetch from you!\"}}"));
 
 
-                    self.addEventListener("message", function (event) {
-                        console.log('mesg recvd' + event.data);
-                    });
+
             });
 
 
