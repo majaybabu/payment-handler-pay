@@ -2,7 +2,7 @@
     window.addEventListener('load', function(evt) {
         console.log('received:----');
 
-        window.addEventListener("message", function (event) {
+        navigator.serviceWorker.addEventListene("message", function (event) {
           console.log('message received:  ' + event.data.msg);
           document.write(event.data.msg);
         });
