@@ -6,7 +6,7 @@
       console.log('its there')
   }
 
-    navigator.serviceWorker.addEventListener('load', function(evt) {
+    window.addEventListener('load', function(evt) {
         console.log('received:----');
 
         navigator.serviceWorker.addEventListener("message", function (event) {
