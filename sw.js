@@ -6,7 +6,7 @@ self.addEventListener('canmakepayment', (evt) => {
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
     var popup =  self.open("", "newWindow", "width=800, height=600");
-    /*evt.respondWith(
+    evt.respondWith(
         new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
         dbX.onsuccess = event => {
@@ -27,11 +27,17 @@ self.addEventListener('paymentrequest', (evt) => {
 
                 resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
             }
+
+            evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
+                .then(function(windowClient) {
+                    windowClient.postMessage(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+            });
             tx.oncomplete = function() {
                 db.close();
             };
         }
-    }).then(function(response){
+    }));
+        /*.then(function(response){
         console.log('response is ' + JSON.stringify(response));
         var popup =  open("", "newWindow", "width=800, height=600");
         popup.document.write('<html><body>Hello!</body></html>');
