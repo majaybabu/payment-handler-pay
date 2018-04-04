@@ -32,7 +32,7 @@ self.addEventListener('paymentrequest', (evt) => {
         }
     }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
-        var popup =  window.open("", "newWindow", "width=800, height=600");
+        var popup =  open("", "newWindow", "width=800, height=600");
         popup.document.write('<html><body>Hello!</body></html>');
         //chrome.windows.create({type: "popup"});
         return response;
