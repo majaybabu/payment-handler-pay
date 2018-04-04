@@ -7,25 +7,16 @@
 <body>
 <script>
     window.addEventListener('load', function(evt) {
+        console.log('message received:----');
+
         setTimeout(function () {
             window.addEventListener("message", function (event) {
-
                 console.log('message received:  ' + event.data, event);
                 document.write('something ' + event.data);
 
-                    //var form = document.getElementById("form");
-                    /*form.onsubmit = function() {
-                var paymentAppResponse = {
-                    methodName: "basic-card",
-                    details: "xyz"
-                };
-                e.source.postMessage(paymentAppResponse);
-                window.close();
-            }*/
-
-
             });
-        }, 1000);
+        }, 100);
+
     });
 
 </script>
