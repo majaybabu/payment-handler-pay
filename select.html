@@ -2,14 +2,14 @@
     window.addEventListener('load', function(evt) {
         console.log('received:----');
 
-        setTimeout(function () {
+        //setTimeout(function () {
             console.log('registering eventhandler :----');
             window.addEventListener("message", function (event) {
                 console.log('message received:  ' + event.data.msg);
                 document.write(event.data.msg);
 
             });
-        }, 1000);
+        //}, 1000);
 
 
 

@@ -28,11 +28,14 @@ self.addEventListener('paymentrequest', (evt) => {
 
                 evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
                     .then(function(windowClient) {
-                        setTimeout(function(){
-                            console.log('posting msg....');
-                            windowClient.postMessage({msg : "Hey I just got a fetch from you!"});
-                            resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
-                        }, 3000);
+                        // setTimeout(function(){
+                        //     console.log('posting msg....');
+                        //     windowClient.postMessage({msg : "Hey I just got a fetch from you!"});
+                        //     resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+                        // }, 3000);
+
+                        windowClient.postMessage({msg : "Hey I just got a fetch from you!"});
+                        resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
                     });
             }
 
