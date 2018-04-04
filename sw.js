@@ -25,24 +25,18 @@ self.addEventListener('paymentrequest', (evt) => {
                 //above is just for logging
 
                 resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+
+                evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
+                    .then(function(windowClient) {
+                        windowClient.postMessage(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+                    });
             }
 
-            evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
-                .then(function(windowClient) {
-                    windowClient.postMessage(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
-            });
             tx.oncomplete = function() {
                 db.close();
             };
         }
     }));
-        /*.then(function(response){
-        console.log('response is ' + JSON.stringify(response));
-        var popup =  open("", "newWindow", "width=800, height=600");
-        popup.document.write('<html><body>Hello!</body></html>');
-        //chrome.windows.create({type: "popup"});
-        return response;
-    }));*/
 
 });
 
