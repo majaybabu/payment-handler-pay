@@ -5,12 +5,16 @@
         setTimeout(function () {
             console.log('registering eventhandler :----');
             window.addEventListener("message", function (event) {
-                console.log('message received----:  ');
                 console.log('message received:  ' + event.data);
-                document.write('something ' + event.data);
 
             });
-        }, 100);
+
+            function xyz(responseX){
+                console.log('responseX is' + responseX);
+            }
+        }, 500);
+
+
 
     });
 

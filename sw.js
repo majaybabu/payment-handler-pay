@@ -30,9 +30,10 @@ self.addEventListener('paymentrequest', (evt) => {
                     .then(function(windowClient) {
                         setTimeout(function(){
                             console.log('posting msg....');
-                            windowClient.postMessage("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                            //windowClient.postMessage("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                            windowClient.xyz("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
                             resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
-                        }, 6000);
+                        }, 1000);
                     });
             }
 
