@@ -1,10 +1,10 @@
 <script>
-    window.addEventListener('load', function(evt) {
+    navigator.serviceWorker.addEventListener('load', function(evt) {
         console.log('received:----');
 
         navigator.serviceWorker.addEventListener("message", function (event) {
-          console.log('message received:  ' + event.data.msg);
-          document.write(event.data.msg);
+          console.log('message received:  ' + event.data);
+          document.write(event.data);
         });
 
 //        setTimeout(function () {

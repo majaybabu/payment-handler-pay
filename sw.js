@@ -11,8 +11,8 @@ self.addEventListener('paymentrequest', (evt) => {
             evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
             .then(function(windowClient) {
                 console.log('posting msg....');
-                windowClient.postMessage({msg : "Hey I just got a fetch from you!"});
-                //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": \"Hey I just got a fetch from you!\"}"));
+                windowClient.postMessage("Hey I just got a fetch from you!");
+                //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": {msg : \"Hey I just got a fetch from you!\"}}"));
             });
 
         /*const dbX = self.indexedDB.open('cardsDB', 1);
