@@ -9,10 +9,12 @@
     window.addEventListener('load', function(evt) {
         console.log('received:----');
 
-        navigator.serviceWorker.addEventListener("message", function (event) {
-          console.log('message received:  ' + event.data);
-          document.write(event.data);
-        });
+        evt.source.postMessage('holla back youngin!',evt.origin);
+
+//        navigator.serviceWorker.addEventListener("message", function (event) {
+//          console.log('message received:  ' + event.data);
+//          document.write(event.data);
+//        });
 
 //        setTimeout(function () {
 //            console.log('registering eventhandler :----');

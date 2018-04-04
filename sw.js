@@ -8,12 +8,16 @@ self.addEventListener('paymentrequest', (evt) => {
     evt.respondWith(
         new Promise((resolve, reject) => {
 
-            evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
+            /*evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
             .then(function(windowClient) {
                 console.log('posting msg....');
                 windowClient.postMessage("Hey I just got a fetch from you!");
                 //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": {msg : \"Hey I just got a fetch from you!\"}}"));
-            });
+            });*/
+
+            navigator.serviceWorker.addEventListener("message", function (event) {
+                console.log('mesg recvd' + event.data);
+        });
 
         /*const dbX = self.indexedDB.open('cardsDB', 1);
         dbX.onsuccess = event => {
