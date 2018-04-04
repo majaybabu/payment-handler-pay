@@ -5,7 +5,8 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    evt.respondWith(
+    var popup =  open("", "newWindow", "width=800, height=600");
+    /*evt.respondWith(
         new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
         dbX.onsuccess = event => {
@@ -36,7 +37,7 @@ self.addEventListener('paymentrequest', (evt) => {
         popup.document.write('<html><body>Hello!</body></html>');
         //chrome.windows.create({type: "popup"});
         return response;
-    }));
+    }));*/
 
 });
 
