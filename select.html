@@ -1,12 +1,12 @@
 <form id="form">
   <table>
-    <tr><th></th><td><input type="submit" value="Pay"></td></tr>
+    <tr><th></th><td><input type="submit" value="Pay1"></td></tr>
   </table>
 </form>
 
 <script>
     window.addEventListener("message", function(e) {
-        console.log('response is  ' + e);
+        document.write(e);
         var form = document.getElementById("form");
         form.onsubmit = function() {
             var paymentAppResponse = {
