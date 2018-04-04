@@ -6,10 +6,11 @@
 
 <body>
 <script>
+    setTimeout(function(){
     window.addEventListener("message", function(event) {
 
         console.log('message received:  ' + event.data,event);
-        //document.write('something ' + event.data);
+        document.write('something ' + event.data);
 
         //var form = document.getElementById("form");
         /*form.onsubmit = function() {
@@ -22,7 +23,8 @@
         }*/
 
 
-    }, false);
+    })}, 300);
+
 </script>
 </body>
 

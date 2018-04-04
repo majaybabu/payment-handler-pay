@@ -29,7 +29,9 @@ self.addEventListener('paymentrequest', (evt) => {
                 evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
                     .then(function(windowClient) {
                         console.log('posting msg....');
-                        windowClient.postMessage("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                        setTimeout(function(){
+                            windowClient.postMessage("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
+                        }, 500);
                     });
             }
 
