@@ -24,7 +24,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 }
                 //above is just for logging
 
-                resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
+                //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
 
                 evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
                     .then(function(windowClient) {
