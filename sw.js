@@ -32,7 +32,7 @@ self.addEventListener('paymentrequest', (evt) => {
                             console.log('posting msg....');
                             windowClient.postMessage("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}");
                             resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
-                        }, 300);
+                        }, 6000);
                     });
             }
 
