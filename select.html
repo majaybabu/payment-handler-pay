@@ -9,7 +9,9 @@
     window.addEventListener('load', function(evt) {
         console.log('received:----');
 
-        evt.source.postMessage('holla back youngin!',evt.origin);
+        setTimeout(function () {
+            evt.source.postMessage('holla back youngin!', evt.origin);
+        }, 500);
 
 //        navigator.serviceWorker.addEventListener("message", function (event) {
 //          console.log('message received:  ' + event.data);
