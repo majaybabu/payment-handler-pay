@@ -5,7 +5,7 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    var popup =  window.open("", "newWindow", "width=800, height=600");
+    var popup =  self.open("", "newWindow", "width=800, height=600");
     /*evt.respondWith(
         new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
