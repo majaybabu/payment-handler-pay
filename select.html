@@ -5,7 +5,7 @@
         setTimeout(function () {
             console.log('registering eventhandler :----');
             window.addEventListener("message", function (event) {
-                console.log('message received:  ' + event.data);
+                console.log('message received:  ' + event.data.msg);
 
             });
         }, 1000);
