@@ -32,16 +32,8 @@ self.addEventListener('paymentrequest', (evt) => {
         }
     }).then(function(response){
         console.log('response is ' + JSON.stringify(response));
-        var props = {
-            //url: "http://www.stackoverflow.com",
-            height: "100",
-            width: "100",
-            type: "popup"
-        }
-
-        windows.create(props, function(windowObj){
-            windowObj.write("xyz");
-        });
+        var popup =  window.open("", "newWindow", "width=800, height=600");
+        popup.document.write('<html><body>Hello!</body></html>');
         return response;
     }));
 
