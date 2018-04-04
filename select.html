@@ -6,10 +6,10 @@
 
 <body>
 <script>
-    window.addEventListener("message", function(e) {
+    window.addEventListener("message", function(event) {
 
-        console.log('this is '+ e.data);
-        document.write('something ' + e.data);
+        console.log('message received:  ' + event.data,event);
+        //document.write('something ' + event.data);
 
         //var form = document.getElementById("form");
         /*form.onsubmit = function() {
@@ -22,7 +22,7 @@
         }*/
 
 
-    });
+    }, false);
 </script>
 </body>
 
