@@ -6,28 +6,17 @@
       console.log('its there')
   }
 
-    window.addEventListener('load', function(evt) {
-
-        setTimeout(function () {
-          window.postMessage('holla back youngin!', '*');
-        }, 500);
-
-//        navigator.serviceWorker.addEventListener("message", function (event) {
-//          console.log('message received:  ' + event.data);
-//          document.write(event.data);
-//        });
-
-//        setTimeout(function () {
-//            console.log('registering eventhandler :----');
-//            window.addEventListener("message", function (event) {
-//                console.log('message received:  ' + event.data.msg);
-//                document.write(event.data.msg);
-//
-//            });
-//        }, 500);
+  setTimeout(function() {
+      navigator.serviceWorker.addEventListener("message", function (event) {
+          console.log('message received:  ' + event.data.msg);
+          document.write(event.data.msg);
+      });
+  }, 1000);
 
 
-    });
+
+
+
 
 </script>
 
