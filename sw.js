@@ -15,7 +15,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": {msg : \"Hey I just got a fetch from you!\"}}"));
 
 
-                    navigator.serviceWorker.addEventListener("message", function (event) {
+                    self.addEventListener("message", function (event) {
                         console.log('mesg recvd' + event.data);
                     });
             });

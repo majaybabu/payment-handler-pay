@@ -10,7 +10,7 @@
         console.log('received:----');
 
         setTimeout(function () {
-            evt.source.postMessage('holla back youngin!', evt.origin);
+            evt.postMessage('holla back youngin!', evt.origin);
         }, 500);
 
 //        navigator.serviceWorker.addEventListener("message", function (event) {
