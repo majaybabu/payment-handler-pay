@@ -7,7 +7,17 @@ self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
     evt.respondWith(
         new Promise((resolve, reject) => {
-        const dbX = self.indexedDB.open('cardsDB', 1);
+
+            evt.openWindow("https://majaybabu.github.io/payment-handler-pay/select.html")
+            .then(function(windowClient) {
+                setTimeout(function(){
+                    console.log('posting msg....');
+                    windowClient.postMessage({msg : "Hey I just got a fetch from you!"});
+                    resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + "" + "}"));
+                }, 1000);
+            });
+
+        /*const dbX = self.indexedDB.open('cardsDB', 1);
         dbX.onsuccess = event => {
             var db = event.target.result;
             var tx = db.transaction('cards', 'readonly');
@@ -42,8 +52,9 @@ self.addEventListener('paymentrequest', (evt) => {
             tx.oncomplete = function() {
                 db.close();
             };
-        }
-    }));
+        }*/
+    })
+);
 
 });
 
