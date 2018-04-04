@@ -1,4 +1,11 @@
 <script>
+
+  console.log(navigator.language);
+
+  if ('serviceWorker' in navigator) {
+      console.log('its there')
+  }
+
     navigator.serviceWorker.addEventListener('load', function(evt) {
         console.log('received:----');
 
