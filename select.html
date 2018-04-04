@@ -10,6 +10,7 @@
         console.log('message received:----');
 
         setTimeout(function () {
+            console.log('registering eventhandler :----');
             window.addEventListener("message", function (event) {
                 console.log('message received:  ' + event.data, event);
                 document.write('something ' + event.data);
