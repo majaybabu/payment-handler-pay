@@ -1,20 +1,18 @@
+let cardPromise = undefined;
+
 self.addEventListener('canmakepayment', (evt) => {
     console.log('canmakepayment evt is ' + evt);
     evt.respondWith(true);
 });
 
-if ('serviceWorker' in navigator) {
-    console.log('its there');
-}
-
-// self.addEventListener("message", function (event) {
-//     console.log('mesg recvd' + event.data);
-// });
+self.addEventListener("message", function (event) {
+    console.log('mesg recvd' + event.data);
+});
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
-    evt.respondWith(
-        new Promise((resolve, reject) => {
+
+    cardPromise = new Promise((resolve, reject) => {
         const dbX = self.indexedDB.open('cardsDB', 1);
         dbX.onsuccess = event => {
             var db = event.target.result;
@@ -37,10 +35,6 @@ self.addEventListener('paymentrequest', (evt) => {
                         setTimeout(function(){
                             console.log('posting msg....');
                             windowClient.postMessage(JSON.parse(cardsResponse));
-                            setTimeout(function(){
-                                var selectedCard = windowClient.getSelectedCard();
-                                console.log('selected card is  ' + JSON.stringify(selectedCard));
-                            }, 1000);
                             //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
                         }, 2000);
                     });
@@ -51,7 +45,8 @@ self.addEventListener('paymentrequest', (evt) => {
             };
         }
     })
-);
+
+    evt.respondWith(cardPromise);
 
 });
 
