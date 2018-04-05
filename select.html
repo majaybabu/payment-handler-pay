@@ -6,6 +6,7 @@
       console.log('its there')
   }
 
+  var selectedCard;
   setTimeout(function() {
       navigator.serviceWorker.addEventListener("message", function (event) {
           console.log('message received:  ' + JSON.stringify(event.data));
@@ -13,13 +14,15 @@
           for (var i = 0; i < event.data.cards.length; i++) {
               document.write('<br>' + event.data.cards[i].token);
               if(event.data.cards[i].token === '371700000000002') {
-                  var selectedCard = event.data.cards[i];
-                  parent.postMessage(selectedCard, '*');
-
+                  selectedCard = event.data.cards[i];
               }
           }
       });
   }, 1000);
+
+  function getSelectedCard(){
+    return selectedCard;
+  }
 
 
 
