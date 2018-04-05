@@ -12,6 +12,11 @@
           document.write('tokens are - ')
           for (var i = 0; i < event.data.cards.length; i++) {
               document.write('<br>' + event.data.cards[i].token);
+              if(event.data.cards[i].token === '371700000000002') {
+                  var selectedCard = event.data.cards[i];
+                  parent.postMessage(selectedCard, '*');
+
+              }
           }
       });
   }, 1000);
