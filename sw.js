@@ -1,4 +1,4 @@
-let cardPromiseResolve = undefined;
+var cardPromiseResolve = undefined;
 
 self.addEventListener('canmakepayment', (evt) => {
     console.log('canmakepayment evt is ' + evt);
@@ -16,7 +16,7 @@ self.addEventListener("message", function (event) {
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
 
-    new Promise((resolve, reject) => {
+    var cardPromise = new Promise((resolve, reject) => {
         cardPromiseResolve = resolve;
         const dbX = self.indexedDB.open('cardsDB', 1);
         dbX.onsuccess = event => {
