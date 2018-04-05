@@ -8,8 +8,8 @@
 
   setTimeout(function() {
       navigator.serviceWorker.addEventListener("message", function (event) {
-          console.log('message received:  ' + event.data);
-          document.write(event.data);
+          console.log('message received:  ' + JSON.stringify(event.data));
+          document.write(JSON.stringify(event.data));
       });
   }, 1000);
 
