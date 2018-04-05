@@ -33,7 +33,7 @@ self.addEventListener('paymentrequest', (evt) => {
                         setTimeout(function(){
                             console.log('posting msg....');
                             windowClient.postMessage(JSON.parse(cardsResponse));
-                            windowClient.addEventListener("message", function (event) {
+                            window.addEventListener("message", function (event) {
                                 console.log('mesg recvd' + event.data);
                             });
                             //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
