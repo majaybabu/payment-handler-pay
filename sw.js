@@ -14,6 +14,7 @@ self.addEventListener("message", function (event) {
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
+    console.log('FLS indicator is ' + evt.methodData[0].data.threeDS)
 
     var cardPromise = new Promise((resolve, reject) => {
         cardPromiseResolve = resolve;
