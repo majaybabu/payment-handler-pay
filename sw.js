@@ -3,9 +3,9 @@ self.addEventListener('canmakepayment', (evt) => {
     evt.respondWith(true);
 });
 
-self.addEventListener("message", function (event) {
-    console.log('mesg recvd' + event.data);
-});
+// self.addEventListener("message", function (event) {
+//     console.log('mesg recvd' + event.data);
+// });
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
@@ -33,6 +33,9 @@ self.addEventListener('paymentrequest', (evt) => {
                         setTimeout(function(){
                             console.log('posting msg....');
                             windowClient.postMessage(JSON.parse(cardsResponse));
+                            windowClient.addEventListener("message", function (event) {
+                                console.log('mesg recvd' + event.data);
+                            });
                             //resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + cardsResponse + "}"));
                         }, 2000);
                     });
