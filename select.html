@@ -9,8 +9,8 @@
   setTimeout(function() {
       navigator.serviceWorker.addEventListener("message", function (event) {
           console.log('message received:  ' + JSON.stringify(event.data));
+          document.write('tokens are - ')
           for (var i = 0; i < event.data.cards.length; i++) {
-              document.write('tokens are - ')
               document.write('<br>' + event.data.cards[i].token);
           }
       });
