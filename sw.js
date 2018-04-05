@@ -3,6 +3,10 @@ self.addEventListener('canmakepayment', (evt) => {
     evt.respondWith(true);
 });
 
+if ('serviceWorker' in navigator) {
+    console.log('its there');
+}
+
 // self.addEventListener("message", function (event) {
 //     console.log('mesg recvd' + event.data);
 // });
