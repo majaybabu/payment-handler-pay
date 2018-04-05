@@ -1,4 +1,4 @@
-let cardPromise = undefined;
+let cardPromiseResolve = undefined;
 
 self.addEventListener('canmakepayment', (evt) => {
     console.log('canmakepayment evt is ' + evt);
@@ -7,15 +7,17 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener("message", function (event) {
     console.log('selected card is - ' + JSON.stringify(event.data));
+    console.log('cardPromise is ' + cardPromise);
     setTimeout(function () {
-        cardPromise.resolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + JSON.stringify(event.data) + "}"));
+        cardPromiseResolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + JSON.stringify(event.data) + "}"));
     }, 5000);
 });
 
 self.addEventListener('paymentrequest', (evt) => {
     console.log('paymentrequest evt is ' + evt);
 
-    cardPromise = new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
+        cardPromiseResolve = resolve;
         const dbX = self.indexedDB.open('cardsDB', 1);
         dbX.onsuccess = event => {
             var db = event.target.result;
@@ -47,7 +49,7 @@ self.addEventListener('paymentrequest', (evt) => {
                 db.close();
             };
         }
-    })
+    });
 
     evt.respondWith(cardPromise);
 
