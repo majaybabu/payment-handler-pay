@@ -1,17 +1,126 @@
-<script>
 
+
+<html>
+<style>
+    /* The container */
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+</style>
+<body>
+<!--
+<h1>Select Card</h1><br>
+<label class="container">One
+    <input type="radio" checked="checked" name="radio">
+    <span class="checkmark"></span>
+</label>
+<label class="container">Two
+    <input type="radio" name="radio">
+    <span class="checkmark"></span>
+</label>
+<label class="container">Three
+    <input type="radio" name="radio">
+    <span class="checkmark"></span>
+</label>
+<label class="container">Four
+    <input type="radio" name="radio">
+    <span class="checkmark"></span>
+</label>
+-->
+
+
+<div id="container">
+    <h1>Select Card</h1>
+    <div id="cardsCntr">
+
+    </div>
+    <button onclick="cardSelected()">Submit</button>
+</div>
+
+</body>
+</html>
+
+<script>
+var jsonArr = [];
   setTimeout(function() {
       navigator.serviceWorker.addEventListener("message", function (event) {
           console.log('message received:  ' + JSON.stringify(event.data));
-          document.write('tokens are - <br>')
+          document.write('tokens are - <br>');
+          var cardHtml='<form id="cards">';
           for (var i = 0; i < event.data.cards.length; i++) {
+              jsonArr[i] = event.data.cards[i];
               document.write('<br>' + event.data.cards[i].token);
-              if(event.data.cards[i].token === '371700000000002') {
-                  navigator.serviceWorker.controller.postMessage(event.data.cards[i]);
-              }
+              cardHtml+='<label class="container">'+event.data.cards[i].token+'<input type="radio" name="card" value="'+i+'"><span class="checkmark"></span></label>'
+
           }
+          cardHtml+='</form>';
+          document.getElementById('cardsCntr').innerHTML = cardHtml;
       });
   }, 100);
 
+  function cardSelected(){
+      var form = document.getElementById("cards");
+      //alert(form.elements["card"].value);
+      navigator.serviceWorker.controller.postMessage(jsonArr[form.elements["card"].value]);
+  }
 </script>
 
