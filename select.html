@@ -38,7 +38,7 @@ var jsonArr = [];
           var cardHtml='<form id="cards">';
           for (var i = 0; i < event.data.cards.length; i++) {
               jsonArr[i] = event.data.cards[i];
-              cardHtml += '<input type="radio" name="card" value="' + i + '">' + event.data.cards[i].token;
+              cardHtml += '<input type="radio" name="card" value="' + i + '"> <b>' + event.data.cards[i].token + '</b><br>';
           }
           cardHtml+='</form>';
           document.getElementById('cardsCntr').innerHTML = cardHtml;
