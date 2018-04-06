@@ -3,6 +3,23 @@
 <html>
 <style>
     /* The container */
+
+    button {
+        background-color: white
+        border: none;
+        color: black;
+        font-weight: bold;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+        width: 150px;
+        display: inline;
+        white-space:nowrap;
+    }
+
     .container {
         display: block;
         position: relative;
@@ -69,7 +86,7 @@
 <body>
 
 <div id="container">
-    <h1>Select Card</h1>
+    <h3>Select Card</h3>
     <div id="cardsCntr"></div>
     <button onclick="cardSelected()">Submit</button>
 </div>
@@ -86,7 +103,6 @@ var jsonArr = [];
           for (var i = 0; i < event.data.cards.length; i++) {
               jsonArr[i] = event.data.cards[i];
               cardHtml+='<label class="container">'+event.data.cards[i].token+'<input type="radio" name="card" value="'+i+'"><span class="checkmark"></span></label>'
-
           }
           cardHtml+='</form>';
           document.getElementById('cardsCntr').innerHTML = cardHtml;
