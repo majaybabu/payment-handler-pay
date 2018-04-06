@@ -7,9 +7,7 @@ self.addEventListener('canmakepayment', (evt) => {
 
 self.addEventListener("message", function (event) {
     console.log('selected card is - ' + JSON.stringify(event.data));
-    setTimeout(function () {
-        cardPromiseResolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + JSON.stringify(event.data) + "}"));
-    }, 3000);
+    cardPromiseResolve(JSON.parse("{\"methodName\": \"https://majaybabu.github.io/payment-handler-pay/\", \"details\": " + JSON.stringify(event.data) + "}"));
 });
 
 self.addEventListener('paymentrequest', (evt) => {
