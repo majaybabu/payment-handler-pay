@@ -67,32 +67,10 @@
     }
 </style>
 <body>
-<!--
-<h1>Select Card</h1><br>
-<label class="container">One
-    <input type="radio" checked="checked" name="radio">
-    <span class="checkmark"></span>
-</label>
-<label class="container">Two
-    <input type="radio" name="radio">
-    <span class="checkmark"></span>
-</label>
-<label class="container">Three
-    <input type="radio" name="radio">
-    <span class="checkmark"></span>
-</label>
-<label class="container">Four
-    <input type="radio" name="radio">
-    <span class="checkmark"></span>
-</label>
--->
-
 
 <div id="container">
     <h1>Select Card</h1>
-    <div id="cardsCntr">
-
-    </div>
+    <div id="cardsCntr"></div>
     <button onclick="cardSelected()">Submit</button>
 </div>
 
@@ -104,11 +82,9 @@ var jsonArr = [];
   setTimeout(function() {
       navigator.serviceWorker.addEventListener("message", function (event) {
           console.log('message received:  ' + JSON.stringify(event.data));
-          document.write('tokens are - <br>');
           var cardHtml='<form id="cards">';
           for (var i = 0; i < event.data.cards.length; i++) {
               jsonArr[i] = event.data.cards[i];
-              document.write('<br>' + event.data.cards[i].token);
               cardHtml+='<label class="container">'+event.data.cards[i].token+'<input type="radio" name="card" value="'+i+'"><span class="checkmark"></span></label>'
 
           }
@@ -119,7 +95,6 @@ var jsonArr = [];
 
   function cardSelected(){
       var form = document.getElementById("cards");
-      //alert(form.elements["card"].value);
       navigator.serviceWorker.controller.postMessage(jsonArr[form.elements["card"].value]);
   }
 </script>
