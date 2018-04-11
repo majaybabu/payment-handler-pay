@@ -23,7 +23,7 @@ function install() {
         .then(() => {
             registration.paymentManager.instruments.get('instrument-key').then((instrument) => {
             console.log('registration.scope is ' + registration.scope);
-            console.log('enabledMethods is ' + instrument.enabledMethods || instrument.method);
+            console.log('enabledMethods is ' + instrument.method);
 
     }).catch((error) => {
         console.log(error);
