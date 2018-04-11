@@ -18,11 +18,12 @@ function install() {
         .set('instrument-key', {
             name: 'Chrome uses name and icon from the web app manifest',
             enabledMethods: ['https://pacific-garden-30467.herokuapp.com/pay3'],
+            method: 'https://pacific-garden-30467.herokuapp.com/pay3',
         })
         .then(() => {
             registration.paymentManager.instruments.get('instrument-key').then((instrument) => {
-            console.log('registration.scope is' + registration.scope);
-            console.log('enabledMethods is' + instrument.enabledMethods);
+            console.log('registration.scope is ' + registration.scope);
+            console.log('enabledMethods is ' + instrument.enabledMethods || instrument.method);
 
     }).catch((error) => {
         console.log(error);

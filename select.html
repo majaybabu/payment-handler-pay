@@ -35,12 +35,12 @@ var jsonArr = [];
   setTimeout(function() {
       navigator.serviceWorker.addEventListener("message", function (event) {
           console.log('message received:  ' + JSON.stringify(event.data));
-          var cardHtml='<form id="cards">';
+          var cardHtml = '<form id="cards">';
           for (var i = 0; i < event.data.cards.length; i++) {
               jsonArr[i] = event.data.cards[i];
               cardHtml += '<input type="radio" name="card" value="' + i + '">  <b>' + event.data.cards[i].token + '</b><br><br>';
           }
-          cardHtml+='</form>';
+          cardHtml += '</form>';
           document.getElementById('cardsCntr').innerHTML = cardHtml;
       });
   }, 100);
